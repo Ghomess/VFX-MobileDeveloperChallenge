@@ -1,17 +1,18 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 
-const Story2 = () => {
-  return <View style={styles.container}></View>;
-};
+import {Searchbar} from '../../components/Searchbar/Searchbar';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {styles} from '../styles';
 
-export default Story2;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff',
-  },
-});
+export default function Story2() {
+  const [pair, setPair] = useState('');
+  return (
+    <SafeAreaView style={styles.container}>
+      <Searchbar
+        placeHolder={'Search Currency Pair'}
+        setValue={setPair}
+        value={pair}
+      />
+    </SafeAreaView>
+  );
+}

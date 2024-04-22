@@ -1,17 +1,18 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 
-const Story1 = () => {
-  return <View style={styles.container}></View>;
-};
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Searchbar} from '../../components/Searchbar/Searchbar';
+import {styles} from '../styles';
 
-export default Story1;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff',
-  },
-});
+export default function Story1() {
+  const [ticket, setTicket] = useState('');
+  return (
+    <SafeAreaView style={styles.container}>
+      <Searchbar
+        placeHolder={'Search Ticket'}
+        setValue={setTicket}
+        value={ticket}
+      />
+    </SafeAreaView>
+  );
+}
