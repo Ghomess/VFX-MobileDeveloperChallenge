@@ -7,9 +7,13 @@ export const searchbarStyles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: 'center',
     backgroundColor: '#1A237E',
-    borderRadius: 5,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    borderBottomColor: '#424242',
+    borderBottomWidth: 2,
   },
   textInput: {
     width: '90%',
+    fontSize: 15,
   },
 });

@@ -5,7 +5,7 @@ Welcome to my VFX-MobileDeveloperChallenge! This app is built using React Native
 ## Features
 
 - Feature 1: Navigate between Screens using the bottom tab navigator.
-- Feature 2: Type the stock in the search bar of the Story1 screen or type the currency pair in the search bar of the Story2 screen. (Nothing will appear as a result for now)
+- Feature 2: Type the stock in the search bar of the Story1 screen or type the currency pair in the search bar of the Story2 screen. It will display the results (hard-coded data) in a list based on your input.
 
 ## Third-Party Libraries
 
