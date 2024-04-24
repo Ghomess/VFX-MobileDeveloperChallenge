@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Searchbar} from '../../components/Searchbar/Searchbar';
-import {styles} from '../styles';
+import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
+import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
 
 export default function Story1() {
   const [ticket, setTicket] = useState('');
@@ -34,6 +35,7 @@ export default function Story1() {
         value={ticket}
       />
       <SearchResults data={filteredData} />
+      <LineChartComponent />
     </SafeAreaView>
   );
 }

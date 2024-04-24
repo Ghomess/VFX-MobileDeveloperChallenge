@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 
 import {Searchbar} from '../../components/Searchbar/Searchbar';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {styles} from '../styles';
+import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
+import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
 
 export default function Story2() {
   const [pair, setPair] = useState('');
@@ -34,6 +35,7 @@ export default function Story2() {
         value={pair}
       />
       <SearchResults data={filteredData} />
+      <LineChartComponent />
     </SafeAreaView>
   );
 }
