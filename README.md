@@ -4,9 +4,16 @@ Welcome to my VFX-MobileDeveloperChallenge! This app is built using React Native
 
 ## Features
 
-- Navigate between Screens using the bottom tab navigator.
-- Type the stock in the search bar of the Story1 screen or type the currency pair in the search bar of the Story2 screen. It will display the results (hard coded data) in a list based on your input.
-- Check the price of the month of the stock/currency pair by clicking on the dots inside the chart. (Currently hard coded to configure the chart itself).
+- Navigate between screens using the bottom tab navigator.
+- Search Functionality:
+  - On the Story1 screen, users can type the stock name in the search bar to display corresponding results (hard-coded data).
+  - On the Story2 screen, users can type the currency pair in the search bar to see relevant information in a list based on their input.
+- Interactive Charts:
+  - Users can explore historical price data by clicking on the dots inside the chart.
+  - The chart is currently configured with hard-coded data for demonstration purposes.
+- Interactive Buttons:
+  - On the Story2, users can switch the chart of the currency pair between the daily, weekly and monthly views.
+  - The buttons are currently not working, will work when real data is in redux.
 
 ## Third-Party Libraries
 

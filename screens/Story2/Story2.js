@@ -5,6 +5,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
 import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
+import {story2styles} from './Story2Styles';
+import {View} from 'react-native';
 
 export default function Story2() {
   const [pair, setPair] = useState('');
@@ -35,6 +38,11 @@ export default function Story2() {
         value={pair}
       />
       <SearchResults data={filteredData} />
+      <View style={story2styles.buttonContainer}>
+        <ButtonComponent title="Daily" />
+        <ButtonComponent title="Weekly" />
+        <ButtonComponent title="Monthly" />
+      </View>
       <LineChartComponent />
     </SafeAreaView>
   );
