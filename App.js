@@ -6,6 +6,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {BottomTabNavigator} from './stack/BottomTabNavigator';
 import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+
+import store from './redux/store';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,13 +18,15 @@ function App() {
   };
 
   return (
-    <NavigationContainer>
-      <BottomTabNavigator />
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <BottomTabNavigator />
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -5,34 +5,55 @@ import {Searchbar} from '../../components/Searchbar/Searchbar';
 import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
 import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {tickerSearch} from '../../utils/apiFunctions';
 
 export default function Story1() {
-  const [ticket, setTicket] = useState('');
-  const [data, setData] = useState([
-    {id: 1, name: 'META'},
-    {id: 2, name: 'AAPL'},
-    {id: 3, name: 'NFLX'},
-  ]);
+  const ticketSearchResults = useSelector(
+    state => state.ticket.ticketSearchResults,
+  );
+  const ticket = useSelector(state => state.ticket.ticket);
+  const [search, setSearch] = useState('');
+
   const [filteredData, setFilteredData] = useState([]);
 
-  //To filter the data depending on the text input value and if the data is updated
+  const dispatch = useDispatch();
+
+  //Use Effect to check if the user inputed on the searchbar
+  //if yes it fetches the api data
   useEffect(() => {
-    //if value inside input exists, filters the data, otherwise it makes the filteredData empty
-    ticket
-      ? setFilteredData(
-          data.filter(item =>
-            item.name.toLowerCase().includes(ticket.toLowerCase()),
-          ),
-        )
-      : setFilteredData([]);
-  }, [data, ticket]);
+    try {
+      if (search.length > 0 && search !== ticket) {
+        tickerSearch(dispatch, search);
+      }
+    } catch (e) {
+      console.log('Error UseEffect: ', e);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
+  //Update the search value when the ticket is selected
+  useEffect(() => {
+    if (ticket) {
+      setSearch(ticket);
+    }
+  }, [ticket]);
+
+  //Update FilteredData with the redux search result state
+  useEffect(() => {
+    if (ticketSearchResults) {
+      setFilteredData(ticketSearchResults);
+    }
+  }, [ticketSearchResults]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeHolder={'Search Ticket'}
-        setValue={setTicket}
-        value={ticket}
+        setValue={setSearch}
+        value={search}
       />
       <SearchResults data={filteredData} />
       <LineChartComponent />
