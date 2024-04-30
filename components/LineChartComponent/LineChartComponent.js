@@ -1,154 +1,126 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Dimensions} from 'react-native';
 import {lineChartStyles} from './LineChartComponentStyles';
-import {LineChart} from 'react-native-gifted-charts';
+
 import {ItemSelectedLabel} from '../ItemSelectedLabel/ItemSelectedLabel';
-import {styles} from '../../styles';
-export const LineChartComponent = data => {
+import {colors, styles} from '../../styles';
+
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {LineChart} from 'react-native-chart-kit';
+import {addPairDateSelected} from '../../redux/reducers/pairSlice';
+import {
+  addTicketMonth,
+  addTicketMonthSelected,
+} from '../../redux/reducers/ticketSlice';
+
+export const LineChartComponent = ({data}) => {
   const windowHeight = Dimensions.get('window').height;
-
-  const [monthSelected, setMonthSelected] = useState('');
+  const windowWidth = Dimensions.get('window').width;
+  const [dateSelected, setDateSelected] = useState('');
   const [priceSelected, setPriceSelected] = useState('');
-  const currentDate = new Date();
-  const monthsArray = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  const [indexSelected, setIndexSelected] = useState();
 
-  const setData = item => {
-    setMonthSelected(item.id);
-    setPriceSelected(item.value);
+  const pair = useSelector(state => state.pair.pair);
+
+  const [suffix, setSuffix] = useState();
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const navigationState = navigation.getState();
+  const currentScreen = navigationState.routes[navigationState.index].name;
+
+  const [newData, setNewData] = useState();
+  const setData = (value, newDateSelected) => {
+    console.log('newDateSelected: ', newDateSelected);
+    dispatchDateSelected(newDateSelected);
+    setDateSelected(newDateSelected);
+    setPriceSelected(value);
   };
 
-  const customDataPoint = month => {
-    return (
-      <View
-        style={[
-          lineChartStyles.datapoint,
-          monthSelected === month && [lineChartStyles.datapointSelected],
-        ]}
-      />
-    );
+  const dispatchDateSelected = date => {
+    currentScreen === 'Stocks' && dispatch(addTicketMonthSelected(date));
+    currentScreen === 'Currency' && dispatch(addPairDateSelected(date));
   };
 
-  //This data below will be inside Redux
-  //HARD CODED DATA
-  const nameSelected = 'META';
-  const hardcodedData = [
-    {
-      id: 0,
-      value: 100,
+  useEffect(() => {
+    if (typeof data === 'object') {
+      if (Object.keys(data).length > 0) {
+        console.log('data Length: ', Object.keys(data).length);
+        console.log('-------------------------------------');
+        console.log('data: ', data);
+        console.log('-------------------------------------');
 
-      customDataPoint: () => customDataPoint(0),
-    },
-    {
-      id: 1,
-      value: 140,
+        setNewData(data);
+        setIndexSelected(data[0].length - 1);
+        setData(data[1][data[0].length - 1], data[0][data[0].length - 1]);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
-      customDataPoint: () => customDataPoint(1),
-    },
-    {
-      id: 2,
-      value: 250,
-      customDataPoint: () => customDataPoint(2),
-    },
-    {
-      id: 3,
-      value: 290,
-
-      customDataPoint: () => customDataPoint(3),
-    },
-    {
-      id: 4,
-      value: 410,
-
-      customDataPoint: () => customDataPoint(4),
-    },
-    {
-      id: 5,
-      value: 440,
-
-      customDataPoint: () => customDataPoint(5),
-    },
-    {
-      id: 6,
-      value: 440,
-
-      customDataPoint: () => customDataPoint(6),
-    },
-    {
-      id: 7,
-      value: 300,
-
-      customDataPoint: () => customDataPoint(7),
-    },
-    {
-      id: 8,
-      value: 280,
-
-      customDataPoint: () => customDataPoint(8),
-    },
-    {
-      id: 9,
-      value: 180,
-
-      customDataPoint: () => customDataPoint(9),
-    },
-    {
-      id: 10,
-      value: 150,
-
-      customDataPoint: () => customDataPoint(10),
-    },
-    {
-      id: 11,
-      value: 150,
-
-      customDataPoint: () => customDataPoint(11),
-    },
-  ];
-  //
+  useEffect(() => {
+    if (pair) {
+      const pairSepareted = pair.split('/');
+      if (pairSepareted[0] === 'EUR') {
+        setSuffix('€');
+      } else if (pairSepareted[0] === 'USD') {
+        setSuffix('$');
+      } else if (pairSepareted[0] === 'GBP') {
+        setSuffix('£');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pair]);
 
   return (
-    hardcodedData.length > 0 && (
+    newData && (
       <View style={[styles.container, lineChartStyles.container]}>
-        <ItemSelectedLabel
-          name={nameSelected}
-          date={
-            !monthSelected
-              ? monthsArray[currentDate.getMonth()]
-              : monthsArray[monthSelected]
-          }
-          price={priceSelected}
-        />
+        {/* //NEED TO CHANGE THIS COMPONENT BECAUSE ONLY ACCEPTS MONTH */}
+        <ItemSelectedLabel date={dateSelected} price={priceSelected} />
+        {/* End of the Component */}
 
+        {/* CHANGE LINE CHART TO  react-native-chart-kit LINE CHART*/}
         <LineChart
           style={lineChartStyles.linechart}
-          adjustToWidth={true}
           height={windowHeight * 0.4}
-          thickness={3}
-          color="#1A237E"
-          yAxisTextStyle={lineChartStyles.yaxisText}
-          yAxisLabelSuffix="€"
-          data={hardcodedData}
-          spacing={25}
-          rulesColor="black"
-          rulesType="solid"
-          initialSpacing={10}
-          yAxisColor="black"
-          xAxisColor="black"
-          focusEnabled
-          onFocus={item => setData(item)}
+          width={windowWidth * 0.9}
+          yAxisSuffix={suffix}
+          data={{
+            datasets: [
+              {
+                data: newData[1],
+              },
+            ],
+          }}
+          chartConfig={{
+            backgroundColor: colors.white,
+            backgroundGradientFrom: colors.white,
+            backgroundGradientTo: colors.white,
+            decimalPlaces: 4, // optional, defaults to 2dp
+            color: (opacity = 1) => colors.blue,
+            labelColor: (opacity = 1) => colors.darkgray,
+            style: {
+              borderRadius: 16,
+            },
+            propsForDots: {
+              r: '6',
+              strokeWidth: '2',
+              stroke: colors.blue,
+            },
+          }}
+          getDotColor={(dataPoint, dataPointIndex) => {
+            if (dataPointIndex === indexSelected) {
+              return colors.yellow;
+            }
+          }}
+          onDataPointClick={({value}) => {
+            const index = newData[1].findIndex(values => values === value);
+
+            setIndexSelected(index);
+
+            setData(value, newData[0][index]);
+          }}
         />
       </View>
     )

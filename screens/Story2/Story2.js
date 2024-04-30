@@ -8,42 +8,87 @@ import {LineChartComponent} from '../../components/LineChartComponent/LineChartC
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import {story2styles} from './Story2Styles';
 import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {pairDataFetch} from '../../utils/apiFunctions';
 
 export default function Story2() {
-  const [pair, setPair] = useState('');
-  const [data, setData] = useState([
+  const pair = useSelector(state => state.pair.pair);
+  const pairdata = useSelector(state => state.pair.pairData);
+  const pairDateType = useSelector(state => state.pair.pairDateType);
+  const dispatch = useDispatch();
+  const [isFocused, setIsFocused] = useState(false);
+  const [search, setSearch] = useState('');
+  const pairs = [
     {id: 1, name: 'EUR/USD'},
-    {id: 2, name: 'GBD/USD'},
-    {id: 3, name: 'BTC/USD'},
-  ]);
-  const [filteredData, setFilteredData] = useState([]);
+    {id: 2, name: 'GBP/USD'},
+    {id: 3, name: 'GBP/EUR'},
+  ];
+  const [filteredSearch, setFilteredSearch] = useState([]);
+  const [enableList, setEnableList] = useState(false);
 
   //To filter the data depending on the text input value and if the data is updated
   useEffect(() => {
     //if value inside input exists, filters the data, otherwise it makes the filteredData empty
-    pair
-      ? setFilteredData(
-          data.filter(item =>
-            item.name.toLowerCase().includes(pair.toLowerCase()),
+    search
+      ? setFilteredSearch(
+          pairs.filter(item =>
+            item.name.toLowerCase().includes(search.toLowerCase()),
           ),
         )
-      : setFilteredData([]);
-  }, [data, pair]);
+      : setFilteredSearch([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
+  useEffect(() => {
+    try {
+      if (search.length > 0 && search === pair) {
+        console.log(
+          'search: ',
+          search,
+          '- pair: ',
+          pair,
+          '- pairDateType: ',
+          pairDateType,
+        );
+        pairDataFetch(dispatch, pair, pairDateType);
+      }
+    } catch (e) {
+      console.log('Error UseEffect: ', e);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, pairDateType]);
+
+  //Update the search value when the ticket is selected
+  useEffect(() => {
+    if (pair) {
+      setSearch(pair);
+    }
+  }, [pair, enableList]);
+
+  useEffect(() => {
+    if (filteredSearch?.length > 0 && isFocused) {
+      setEnableList(true);
+    }
+  }, [filteredSearch, isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeHolder={'Search Currency Pair'}
-        setValue={setPair}
-        value={pair}
+        setValue={setSearch}
+        value={search}
+        setIsFocused={setIsFocused}
       />
-      <SearchResults data={filteredData} />
+      {enableList && (
+        <SearchResults data={filteredSearch} setEnableList={setEnableList} />
+      )}
       <View style={story2styles.buttonContainer}>
         <ButtonComponent title="Daily" />
         <ButtonComponent title="Weekly" />
         <ButtonComponent title="Monthly" />
       </View>
-      <LineChartComponent />
+      <LineChartComponent data={pairdata} />
     </SafeAreaView>
   );
 }

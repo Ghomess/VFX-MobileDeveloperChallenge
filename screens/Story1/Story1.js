@@ -19,7 +19,8 @@ export default function Story1() {
   const [filteredData, setFilteredData] = useState([]);
 
   const dispatch = useDispatch();
-
+  const [enableList, setEnableList] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   //Use Effect to check if the user inputed on the searchbar
   //if yes it fetches the api data
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function Story1() {
     if (ticket) {
       setSearch(ticket);
     }
-  }, [ticket]);
+  }, [ticket, enableList]);
 
   //Update FilteredData with the redux search result state
   useEffect(() => {
@@ -48,14 +49,23 @@ export default function Story1() {
     }
   }, [ticketSearchResults]);
 
+  useEffect(() => {
+    if (filteredData?.length > 0 && isFocused) {
+      setEnableList(true);
+    }
+  }, [filteredData, isFocused]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeHolder={'Search Ticket'}
         setValue={setSearch}
         value={search}
+        setIsFocused={setIsFocused}
       />
-      <SearchResults data={filteredData} />
+      {enableList && (
+        <SearchResults data={filteredData} setEnableList={setEnableList} />
+      )}
       <LineChartComponent />
     </SafeAreaView>
   );

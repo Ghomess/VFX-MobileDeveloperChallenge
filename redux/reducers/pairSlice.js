@@ -2,8 +2,9 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   pair: null,
-  pairData: {},
-  pairDateSelected: null,
+  pairData: [],
+  pairDateSelected: '',
+  pairDateType: 'Daily',
 };
 
 const pairSlice = createSlice({
@@ -12,19 +13,24 @@ const pairSlice = createSlice({
   reducers: {
     addPair: (state, action) => {
       console.log('ADD PAIR: ', action.payload);
-      state.ticket = action.payload;
+      state.pair = action.payload;
     },
     addPairData: (state, action) => {
       console.log('ADD PAIR DATA: ', action.payload);
       state.pairData = action.payload;
     },
-    addPairMonth: (state, action) => {
+    addPairDateSelected: (state, action) => {
       console.log('ADD PAIR DATE: ', action.payload);
       state.pairDateSelected = action.payload;
+    },
+    addPairDateType: (state, action) => {
+      console.log('ADD PAIR DATE: ', action.payload);
+      state.pairDateType = action.payload;
     },
   },
 });
 
-export const {addPair, addPairData, addPairMonth} = pairSlice.actions;
+export const {addPair, addPairData, addPairDateSelected, addPairDateType} =
+  pairSlice.actions;
 
 export default pairSlice.reducer;

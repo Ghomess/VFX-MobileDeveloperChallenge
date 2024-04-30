@@ -7,7 +7,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {BottomTabNavigator} from './stack/BottomTabNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
-
+import {API_KEY} from '@env';
 import store from './redux/store';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  console.log('-ENV: ', API_KEY);
   return (
     <Provider store={store}>
       <NavigationContainer>

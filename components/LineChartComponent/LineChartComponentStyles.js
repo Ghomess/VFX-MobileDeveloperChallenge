@@ -22,17 +22,4 @@ export const lineChartStyles = StyleSheet.create({
   linechart: {
     alignSelf: 'center',
   },
-  datapoint: {
-    width: 15,
-    height: 15,
-    backgroundColor: '#1A237E',
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: '#1A237E',
-  },
-  datapointSelected: {
-    backgroundColor: '#FFD700',
-  },
-  customlabelContainer: {width: 70, marginLeft: 7},
-  customlabelText: {color: 'black', fontWeight: 'bold'},
 });

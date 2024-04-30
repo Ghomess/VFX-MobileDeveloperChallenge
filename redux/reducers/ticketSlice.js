@@ -5,6 +5,7 @@ const initialState = {
   ticketData: {},
   ticketSearchResults: [],
   ticketMonthSelected: null,
+  ticketDateType: 'Monthly',
 };
 
 const ticketSlice = createSlice({
@@ -19,7 +20,7 @@ const ticketSlice = createSlice({
       console.log('ADD TICKET DATA: ', action.payload);
       state.ticketData = action.payload;
     },
-    addTicketMonth: (state, action) => {
+    addTicketMonthSelected: (state, action) => {
       console.log('ADD TICKET MONTH: ', action.payload);
       state.ticketMonthSelected = action.payload;
     },
@@ -33,7 +34,7 @@ const ticketSlice = createSlice({
 export const {
   addTicket,
   addTicketData,
-  addTicketMonth,
+  addTicketMonthSelected,
   addTicketSearchResults,
 } = ticketSlice.actions;
 
