@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const story2styles = StyleSheet.create({
+export const currencystyles = StyleSheet.create({
   buttonContainer: {
     marginTop: 20,
     flexDirection: 'row',

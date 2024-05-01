@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../styles';
 
 export const itemSelectedLabelStyles = StyleSheet.create({
   container: {
@@ -11,17 +12,17 @@ export const itemSelectedLabelStyles = StyleSheet.create({
   },
 
   itemName: {
-    color: '#424242',
+    color: colors.darkgray,
     fontSize: 20,
     fontWeight: 'bold',
   },
   itemPrice: {
-    color: '#1A237E',
+    color: colors.blue,
     fontSize: 20,
     fontWeight: 'bold',
   },
   itemMonth: {
-    color: '#424242',
+    color: colors.darkgray,
     fontSize: 20,
     fontWeight: 'bold',
   },

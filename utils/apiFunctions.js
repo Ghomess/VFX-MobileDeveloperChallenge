@@ -1,5 +1,8 @@
 import {addPairData, addPairDateType} from '../redux/reducers/pairSlice';
-import {addTicketSearchResults} from '../redux/reducers/ticketSlice';
+import {
+  addstockData,
+  addtickerSearchResults,
+} from '../redux/reducers/stockSlice';
 import {API_KEY} from '@env';
 export function tickerSearch(dispatch, search) {
   const url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${search}&apikey=${API_KEY}`;
@@ -20,7 +23,54 @@ export function tickerSearch(dispatch, search) {
       } catch (e) {
         console.log('Error: ', e);
       } finally {
-        dispatch(addTicketSearchResults(symbols));
+        dispatch(addtickerSearchResults(symbols));
+      }
+    })
+    .catch(e => {
+      console.log('Error: ', e);
+    });
+}
+export function stockDataFetch(dispatch, ticker) {
+  //url with dateType selected and pair selected
+  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticker}&apikey=${API_KEY}`;
+
+  console.log('- URL: ', url);
+  const demoUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo`;
+
+  fetch(url)
+    .then(async result => {
+      const data = await result.json();
+      /*  console.log('--------------');
+      console.log('data: ', data);
+      console.log('--------------'); */
+
+      const dataMonthly = data['Monthly Time Series'];
+      const timestamps = Object.keys(dataMonthly);
+      let dataToRedux = [];
+      let timestampsArray = [];
+      let dataArray = [];
+
+      try {
+        for (let i = 0; i < 12; i++) {
+          const timestamp = timestamps[i];
+          /*   console.log('Timestamp:', timestamp);
+          console.log('Data:', dataDaily[timestamp]);
+          console.log('--------------------'); */
+
+          timestampsArray.push(timestamp);
+
+          dataArray.push(parseFloat(dataMonthly[timestamp]['4. close']));
+        }
+      } catch (e) {
+        console.log('Error: ', e);
+      } finally {
+        timestampsArray.reverse();
+        dataArray.reverse();
+        dataToRedux.push(timestampsArray, dataArray);
+
+        if (dataToRedux.length > 0) {
+          dispatch(addstockData(dataToRedux));
+        }
       }
     })
     .catch(e => {
@@ -51,14 +101,14 @@ export function pairDataFetch(dispatch, pair, dateType) {
       console.log('data: ', data);
       console.log('--------------'); */
 
-      const dataDaily = data[`Time Series FX (${dateTypeString})`];
-      const timestamps = Object.keys(dataDaily);
+      const rawData = data[`Time Series FX (${dateTypeString})`];
+      const timestamps = Object.keys(rawData);
       let dataToRedux = [];
       let timestampsArray = [];
       let dataArray = [];
       let dataLength;
       if (dateTypeString === 'Daily') {
-        dataLength = 6;
+        dataLength = 7;
       } else if (dateTypeString === 'Weekly') {
         dataLength = 4;
       } else if (dateTypeString === 'Monthly') {
@@ -75,7 +125,7 @@ export function pairDataFetch(dispatch, pair, dateType) {
 
           timestampsArray.push(timestamp);
 
-          dataArray.push(parseFloat(dataDaily[timestamp]['4. close']));
+          dataArray.push(parseFloat(rawData[timestamp]['4. close']));
         }
       } catch (e) {
         console.log('Error: ', e);

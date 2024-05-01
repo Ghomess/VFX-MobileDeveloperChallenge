@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import ticketSlice from '../reducers/ticketSlice';
+import stockSlice from '../reducers/stockSlice';
 import pairSlice from '../reducers/pairSlice';
 
 const store = configureStore({
   reducer: {
-    ticket: ticketSlice,
+    ticker: stockSlice,
     pair: pairSlice,
   },
 });

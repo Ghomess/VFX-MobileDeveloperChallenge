@@ -7,15 +7,15 @@ Welcome to my VFX-MobileDeveloperChallenge! This app is built using React Native
 - Navigate between screens using the bottom tab navigator.
 
 - Search Functionality:
-  - On the Story1 screen, users can type the stock name in the search bar to display corresponding results using Alpha Vantage API, and can select it.
-  - On the Story2 screen, users can type the currency pair in the search bar to see a list based on their input, there are only 3 currency pairs, EUR/USD, GBP/USD and GBP/EUR.
+  - On the Stocks screen, users can type the stock name in the search bar to display corresponding results using Alpha Vantage API, and can select it.
+  - On the Currency screen, users can type the currency pair in the search bar to see a list based on their input, there are only 3 currency pairs, EUR/USD, GBP/USD and GBP/EUR.
 - Interactive Charts:
 
   - Users can explore historical price data by clicking on the dots inside the chart.
-  - The chart is currently configured to receive API data only for the Story2.
+  - The chart is currently configured to receive API data in both screens.
 
 - Interactive Buttons:
-  - On the Story2, users can switch the chart of the currency pair between the daily, weekly and monthly views.
+  - On the Currency, users can switch the chart of the currency pair between the daily, weekly and monthly views.
 
 ## Third-Party Libraries
 

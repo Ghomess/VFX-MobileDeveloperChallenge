@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../styles';
 
 export const searchResultsStyles = StyleSheet.create({
   container: {
     display: 'flex',
     width: '90%',
     alignContent: 'center',
-    backgroundColor: '#1A237E',
+    backgroundColor: colors.blue,
 
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
@@ -13,7 +14,7 @@ export const searchResultsStyles = StyleSheet.create({
   separator: {
     borderBottomWidth: 2,
 
-    borderColor: '#424242',
+    borderColor: colors.darkgray,
   },
   itemContainer: {
     borderRadius: 5,
@@ -21,7 +22,7 @@ export const searchResultsStyles = StyleSheet.create({
     paddingLeft: 15,
   },
   itemText: {
-    color: '#ffffff',
+    color: colors.white,
     fontSize: 15,
   },
 });

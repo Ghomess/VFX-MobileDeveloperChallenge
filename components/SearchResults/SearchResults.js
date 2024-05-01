@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {searchResultsStyles} from './SearchResultsStyles';
 import {useDispatch} from 'react-redux';
-import {addTicket} from '../../redux/reducers/ticketSlice';
+import {addticker} from '../../redux/reducers/stockSlice';
 import {addPair} from '../../redux/reducers/pairSlice';
 import {useNavigation} from '@react-navigation/native';
 
 function Item({name, setEnableList, screen}) {
   const dispatch = useDispatch();
   const handlePress = () => {
-    screen === 'Stocks' && dispatch(addTicket(name));
+    screen === 'Stocks' && dispatch(addticker(name));
     screen === 'Currency' && dispatch(addPair(name));
     setEnableList(false);
   };

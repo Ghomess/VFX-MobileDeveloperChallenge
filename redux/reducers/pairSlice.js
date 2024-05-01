@@ -5,6 +5,7 @@ const initialState = {
   pairData: [],
   pairDateSelected: '',
   pairDateType: 'Daily',
+  pairPrice: null,
 };
 
 const pairSlice = createSlice({
@@ -27,10 +28,19 @@ const pairSlice = createSlice({
       console.log('ADD PAIR DATE: ', action.payload);
       state.pairDateType = action.payload;
     },
+    addPairPrice: (state, action) => {
+      console.log('ADD PAIR PRICE: ', action.payload);
+      state.pairPrice = action.payload;
+    },
   },
 });
 
-export const {addPair, addPairData, addPairDateSelected, addPairDateType} =
-  pairSlice.actions;
+export const {
+  addPair,
+  addPairData,
+  addPairDateSelected,
+  addPairDateType,
+  addPairPrice,
+} = pairSlice.actions;
 
 export default pairSlice.reducer;

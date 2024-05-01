@@ -6,12 +6,12 @@ import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
 import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
-import {story2styles} from './Story2Styles';
+import {currencystyles} from './CurrencyStyles';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {pairDataFetch} from '../../utils/apiFunctions';
 
-export default function Story2() {
+export default function Currency() {
   const pair = useSelector(state => state.pair.pair);
   const pairdata = useSelector(state => state.pair.pairData);
   const pairDateType = useSelector(state => state.pair.pairDateType);
@@ -59,7 +59,7 @@ export default function Story2() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, pairDateType]);
 
-  //Update the search value when the ticket is selected
+  //Update the search value when the ticker is selected
   useEffect(() => {
     if (pair) {
       setSearch(pair);
@@ -83,7 +83,7 @@ export default function Story2() {
       {enableList && (
         <SearchResults data={filteredSearch} setEnableList={setEnableList} />
       )}
-      <View style={story2styles.buttonContainer}>
+      <View style={currencystyles.buttonContainer}>
         <ButtonComponent title="Daily" />
         <ButtonComponent title="Weekly" />
         <ButtonComponent title="Monthly" />

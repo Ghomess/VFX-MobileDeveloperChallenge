@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {buttonStyles} from './ButtonComponentStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {addPairDateType} from '../../redux/reducers/pairSlice';
-import {colors} from '../../styles';
+
 import {useNavigation} from '@react-navigation/native';
 
 const ButtonComponent = ({title}) => {
@@ -12,10 +12,10 @@ const ButtonComponent = ({title}) => {
   const navigationState = navigation.getState();
   const currentScreen = navigationState.routes[navigationState.index].name;
   const pairDateType = useSelector(state => state.pair.pairDateType);
-  const ticketDateType = useSelector(state => state.ticket.ticketDateType);
+  const stockDateType = useSelector(state => state.ticker.stockDateType);
   const checkDataType = () => {
     if (currentScreen === 'Stocks') {
-      return ticketDateType;
+      return stockDateType;
     } else if (currentScreen === 'Currency') {
       return pairDateType;
     }

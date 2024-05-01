@@ -12,8 +12,9 @@ export const styles = StyleSheet.create({
 export const colors = {
   blue: '#1A237E',
   yellow: '#FFD700',
-  white: '#fff',
+  white: '#ffffff',
   darkgray: '#424242',
   green: '#388E3C',
   purple: '#6A1B9A',
+  lightgray: '#8C8C8C',
 };

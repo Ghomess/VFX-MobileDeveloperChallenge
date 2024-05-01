@@ -7,15 +7,15 @@ import {SearchResults} from '../../components/SearchResults/SearchResults';
 import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {tickerSearch} from '../../utils/apiFunctions';
+import {stockDataFetch, tickerSearch} from '../../utils/apiFunctions';
 
-export default function Story1() {
-  const ticketSearchResults = useSelector(
-    state => state.ticket.ticketSearchResults,
+export default function Stocks() {
+  const tickerSearchResults = useSelector(
+    state => state.ticker.tickerSearchResults,
   );
-  const ticket = useSelector(state => state.ticket.ticket);
+  const ticker = useSelector(state => state.ticker.ticker);
   const [search, setSearch] = useState('');
-
+  const stockdata = useSelector(state => state.ticker.stockData);
   const [filteredData, setFilteredData] = useState([]);
 
   const dispatch = useDispatch();
@@ -25,8 +25,12 @@ export default function Story1() {
   //if yes it fetches the api data
   useEffect(() => {
     try {
-      if (search.length > 0 && search !== ticket) {
+      if (search.length > 0 && search !== ticker) {
         tickerSearch(dispatch, search);
+      }
+      if (search.length > 0 && search === ticker) {
+        console.log('search: ', search, '- ticker: ', ticker);
+        stockDataFetch(dispatch, ticker);
       }
     } catch (e) {
       console.log('Error UseEffect: ', e);
@@ -35,19 +39,19 @@ export default function Story1() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  //Update the search value when the ticket is selected
+  //Update the search value when the ticker is selected
   useEffect(() => {
-    if (ticket) {
-      setSearch(ticket);
+    if (ticker) {
+      setSearch(ticker);
     }
-  }, [ticket, enableList]);
+  }, [ticker, enableList]);
 
   //Update FilteredData with the redux search result state
   useEffect(() => {
-    if (ticketSearchResults) {
-      setFilteredData(ticketSearchResults);
+    if (tickerSearchResults) {
+      setFilteredData(tickerSearchResults);
     }
-  }, [ticketSearchResults]);
+  }, [tickerSearchResults]);
 
   useEffect(() => {
     if (filteredData?.length > 0 && isFocused) {
@@ -58,7 +62,7 @@ export default function Story1() {
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
-        placeHolder={'Search Ticket'}
+        placeHolder={'Search ticker'}
         setValue={setSearch}
         value={search}
         setIsFocused={setIsFocused}
@@ -66,7 +70,7 @@ export default function Story1() {
       {enableList && (
         <SearchResults data={filteredData} setEnableList={setEnableList} />
       )}
-      <LineChartComponent />
+      <LineChartComponent data={stockdata} />
     </SafeAreaView>
   );
 }
