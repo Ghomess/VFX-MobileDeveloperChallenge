@@ -26,4 +26,15 @@ export const itemSelectedLabelStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  pricerefreshContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  refreshButton: {
+    marginLeft: 10,
+    padding: 5,
+    backgroundColor: colors.blue,
+    borderRadius: 15,
+  },
 });

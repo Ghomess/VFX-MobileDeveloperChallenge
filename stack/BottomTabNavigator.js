@@ -6,30 +6,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Ionicicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {View} from 'react-native';
+
 import {tabBarStyles} from './BottomTabNavigatorStyles';
 import {colors} from '../styles';
 const Tab = createBottomTabNavigator();
 
-const tabBarIcon = ({focused, size, screen}) => {
-  if (screen === 'Stocks') {
-    return (
-      <Ionicicons
-        name="business"
-        size={size}
-        color={focused ? colors.yellow : colors.white}
-      />
-    );
-  } else if (screen === 'Currency') {
-    return (
-      <Ionicicons
-        name="currency-exchange"
-        size={size}
-        color={focused ? colors.yellow : colors.white}
-      />
-    );
-  }
-};
 export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator

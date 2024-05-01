@@ -1,15 +1,18 @@
 import React, {useCallback, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {itemSelectedLabelStyles} from './ItemSelectedLabelStyles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {colors} from '../../styles';
+import {pairDataFetch, stockDataFetch} from '../../utils/apiFunctions';
 
 export function ItemSelectedLabel() {
   //add current price when we have real data using redux
   const navigation = useNavigation();
   const navigationState = navigation.getState();
   const currentScreen = navigationState.routes[navigationState.index].name;
-
+  const dispatch = useDispatch();
   const pair = useSelector(state => state.pair.pair);
   const ticker = useSelector(state => state.ticker.ticker);
   const tickerDateSelected = useSelector(
@@ -79,6 +82,15 @@ export function ItemSelectedLabel() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }
+
+  function refresh() {
+    if (currentScreen === 'Currency' && pair) {
+      pairDataFetch(dispatch, pair, pairDateType);
+    } else if (currentScreen === 'Stocks' && ticker) {
+      stockDataFetch(dispatch, ticker, stockDateType);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
   useFocusEffect(
     useCallback(() => {
       PriceSuffixFunction();
@@ -90,7 +102,14 @@ export function ItemSelectedLabel() {
   return (
     <View style={itemSelectedLabelStyles.container}>
       <Text style={itemSelectedLabelStyles.itemMonth}>{checkDataType()}</Text>
-      <Text style={itemSelectedLabelStyles.itemPrice}>{priceSuffix}</Text>
+      <View style={itemSelectedLabelStyles.pricerefreshContainer}>
+        <Text style={itemSelectedLabelStyles.itemPrice}>{priceSuffix}</Text>
+        <TouchableOpacity
+          style={itemSelectedLabelStyles.refreshButton}
+          onPress={() => refresh()}>
+          <FontAwesome name={'refresh'} size={20} color={colors.white} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

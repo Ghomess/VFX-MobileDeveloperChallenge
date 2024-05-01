@@ -7,15 +7,17 @@ Welcome to my VFX-MobileDeveloperChallenge! This app is built using React Native
 - Navigate between screens using the bottom tab navigator.
 
 - Search Functionality:
-  - On the Stocks screen, users can type the stock name in the search bar to display corresponding results using Alpha Vantage API, and can select it.
+  - On the Stocks screen, users can type the stock name in the search bar to display corresponding results using the Alpha Vantage API, and can select it.
   - On the Currency screen, users can type the currency pair in the search bar to see a list based on their input, there are only 3 currency pairs, EUR/USD, GBP/USD and GBP/EUR.
-- Interactive Charts:
+- Interactive charts:
 
   - Users can explore historical price data by clicking on the dots inside the chart.
   - The chart is currently configured to receive API data in both screens.
 
 - Interactive Buttons:
-  - On the Currency, users can switch the chart of the currency pair between the daily, weekly and monthly views.
+  - On the Currency screen, users can switch the chart of the currency pair between the daily, weekly and monthly views.
+- Refresh functionality:
+  - Users can refresh content by tapping on the refresh button.
 
 ## Third-Party Libraries
 
@@ -25,7 +27,7 @@ Here's a list of third-party libraries used in this project and their purposes:
 
 - **react-native-vector-icons**: React Native Vector Icons is used for adding icons to the app. It provides a wide range of customizable icons that can be easily integrated into the app. It's used inside the bottom tab navigator and inside the search bar component.
 
-- **react-native-chart-kit**: React Native Chart Kit is used to add charts to the app. It provides customizable charts that can be easily integrated, some of the features I'm using are the onDataPointClick function to know which data point the user clicked to show more details about that data point and change the color of it using getDotColor. It's used to show the price of the stocks and the price of the currency pairs, daily, weekly and monthly depending on the user's input. (Now it's already getting data from an API).
+- **react-native-chart-kit**: React Native Chart Kit is used to add charts to the app. It provides customizable charts that can be easily integrated, some of the features I'm using are the onDataPointClick function to know which data point the user clicked to show more details about that data point and change the color of it using getDotColor. It's used to show the monthly price of the stocks and the price of the currency pairs, daily, weekly and monthly depending on the user's input. (Now it's already getting data from an API).
 
 - **react-native-svg**: React Native SVG provides SVG support for React Native and is required in the react-native-svg-charts library.
 
