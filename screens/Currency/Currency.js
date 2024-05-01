@@ -35,7 +35,7 @@ export default function Currency() {
             item.name.toLowerCase().includes(search.toLowerCase()),
           ),
         )
-      : setFilteredSearch([]);
+      : setFilteredSearch(pairs);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
@@ -67,10 +67,10 @@ export default function Currency() {
   }, [pair, enableList]);
 
   useEffect(() => {
-    if (filteredSearch?.length > 0 && isFocused) {
+    if (isFocused) {
       setEnableList(true);
     }
-  }, [filteredSearch, isFocused]);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -9,8 +9,12 @@ import {useNavigation} from '@react-navigation/native';
 function Item({name, setEnableList, screen}) {
   const dispatch = useDispatch();
   const handlePress = () => {
-    screen === 'Stocks' && dispatch(addticker(name));
-    screen === 'Currency' && dispatch(addPair(name));
+    if (screen === 'Stocks') {
+      dispatch(addticker(name));
+    } else if (screen === 'Currency') {
+      dispatch(addPair(name));
+    }
+
     setEnableList(false);
   };
   return (
