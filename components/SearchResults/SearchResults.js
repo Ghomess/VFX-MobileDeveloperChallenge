@@ -5,6 +5,10 @@ import {useDispatch} from 'react-redux';
 import {addticker} from '../../redux/reducers/stockSlice';
 import {addPair} from '../../redux/reducers/pairSlice';
 import {useNavigation} from '@react-navigation/native';
+import {
+  changeLoadingChart,
+  changeLoadingSearchResults,
+} from '../../redux/reducers/loadingSlice';
 
 function Item({name, setEnableList, screen}) {
   const dispatch = useDispatch();
@@ -14,7 +18,7 @@ function Item({name, setEnableList, screen}) {
     } else if (screen === 'Currency') {
       dispatch(addPair(name));
     }
-
+    dispatch(changeLoadingChart(true));
     setEnableList(false);
   };
   return (
@@ -32,11 +36,17 @@ function ItemSeparatorComponent() {
 
 export const SearchResults = ({data, setEnableList}) => {
   const navigation = useNavigation();
-
   const navigationState = navigation.getState();
-
   const currentScreen = navigationState.routes[navigationState.index].name;
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(changeLoadingSearchResults(false));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
   function renderItem({item}) {
     return (
       <Item

@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {itemSelectedLabelStyles} from './ItemSelectedLabelStyles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -6,6 +6,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../../styles';
 import {pairDataFetch, stockDataFetch} from '../../utils/apiFunctions';
+import {changeLoadingChart} from '../../redux/reducers/loadingSlice';
 
 export function ItemSelectedLabel() {
   //add current price when we have real data using redux
@@ -40,23 +41,24 @@ export function ItemSelectedLabel() {
   ];
 
   const [priceSuffix, setPriceSuffix] = useState();
-  const checkDataType = () => {
+  const [date, setDate] = useState();
+  function CheckDataType() {
     let screenDateSelected;
     let screenDateType;
-    if (currentScreen === 'Stocks') {
+    if (currentScreen === 'Stocks' && ticker) {
       screenDateSelected = tickerDateSelected;
       screenDateType = stockDateType;
-    } else if (currentScreen === 'Currency') {
+    } else if (currentScreen === 'Currency' && pair) {
       screenDateSelected = pairDateSelected;
       screenDateType = pairDateType;
     }
 
     if (screenDateType === 'Monthly') {
-      return monthNames[new Date(screenDateSelected).getMonth()];
+      setDate(monthNames[new Date(screenDateSelected).getMonth()]);
     } else {
-      return screenDateSelected;
+      setDate(screenDateSelected);
     }
-  };
+  }
   function PriceSuffixFunction() {
     let price;
     if (currentScreen === 'Currency' && pair) {
@@ -89,19 +91,21 @@ export function ItemSelectedLabel() {
     } else if (currentScreen === 'Stocks' && ticker) {
       stockDataFetch(dispatch, ticker, stockDateType);
     }
+    console.log('refreshing');
+    dispatch(changeLoadingChart(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }
   useFocusEffect(
     useCallback(() => {
       PriceSuffixFunction();
-
+      CheckDataType();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentScreen, pairPrice, stockPrice]),
   );
-  //SHOW WEEK NUMBER AND DAY
+
   return (
     <View style={itemSelectedLabelStyles.container}>
-      <Text style={itemSelectedLabelStyles.itemMonth}>{checkDataType()}</Text>
+      <Text style={itemSelectedLabelStyles.itemMonth}>{date}</Text>
       <View style={itemSelectedLabelStyles.pricerefreshContainer}>
         <Text style={itemSelectedLabelStyles.itemPrice}>{priceSuffix}</Text>
         <TouchableOpacity

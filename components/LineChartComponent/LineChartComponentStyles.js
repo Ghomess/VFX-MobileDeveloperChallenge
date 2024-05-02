@@ -22,4 +22,7 @@ export const lineChartStyles = StyleSheet.create({
   linechart: {
     alignSelf: 'center',
   },
+  loading: {
+    flex: 0.5,
+  },
 });

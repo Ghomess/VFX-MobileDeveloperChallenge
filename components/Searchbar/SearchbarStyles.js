@@ -14,7 +14,7 @@ export const searchbarStyles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   textInput: {
-    width: '90%',
+    width: '88%',
     fontSize: 15,
   },
 });

@@ -7,4 +7,7 @@ export const currencystyles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '90%',
   },
+  loading: {
+    flex: 0.5,
+  },
 });

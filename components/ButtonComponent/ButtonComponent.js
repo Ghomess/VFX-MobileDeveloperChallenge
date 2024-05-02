@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addPairDateType} from '../../redux/reducers/pairSlice';
 
 import {useNavigation} from '@react-navigation/native';
+import {changeLoadingChart} from '../../redux/reducers/loadingSlice';
 
 const ButtonComponent = ({title}) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const ButtonComponent = ({title}) => {
   return (
     <TouchableOpacity
       onPress={() => {
+        dispatch(changeLoadingChart(true));
         dispatch(addPairDateType(title));
       }}
       style={[

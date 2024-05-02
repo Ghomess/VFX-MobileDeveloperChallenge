@@ -1,3 +1,4 @@
+import {changeLoadingChart} from '../redux/reducers/loadingSlice';
 import {addPairData, addPairDateType} from '../redux/reducers/pairSlice';
 import {
   addstockData,

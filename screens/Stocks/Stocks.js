@@ -8,6 +8,10 @@ import {LineChartComponent} from '../../components/LineChartComponent/LineChartC
 import {useDispatch, useSelector} from 'react-redux';
 
 import {stockDataFetch, tickerSearch} from '../../utils/apiFunctions';
+import {
+  changeLoadingChart,
+  changeLoadingSearchResults,
+} from '../../redux/reducers/loadingSlice';
 
 export default function Stocks() {
   const tickerSearchResults = useSelector(
@@ -26,10 +30,12 @@ export default function Stocks() {
   useEffect(() => {
     try {
       if (search.length > 0 && search !== ticker) {
+        dispatch(changeLoadingSearchResults(true));
         tickerSearch(dispatch, search);
       }
       if (search.length > 0 && search === ticker) {
         console.log('search: ', search, '- ticker: ', ticker);
+        dispatch(changeLoadingChart(true));
         stockDataFetch(dispatch, ticker);
       }
     } catch (e) {
