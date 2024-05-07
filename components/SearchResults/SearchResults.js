@@ -1,38 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {FlatList, View} from 'react-native';
 import {searchResultsStyles} from './SearchResultsStyles';
 import {useDispatch} from 'react-redux';
-import {addticker} from '../../redux/reducers/stockSlice';
-import {addPair} from '../../redux/reducers/pairSlice';
+
 import {useNavigation} from '@react-navigation/native';
-import {
-  changeLoadingChart,
-  changeLoadingSearchResults,
-} from '../../redux/reducers/loadingSlice';
-
-function Item({name, setEnableList, screen}) {
-  const dispatch = useDispatch();
-  const handlePress = () => {
-    if (screen === 'Stocks') {
-      dispatch(addticker(name));
-    } else if (screen === 'Currency') {
-      dispatch(addPair(name));
-    }
-    dispatch(changeLoadingChart(true));
-    setEnableList(false);
-  };
-  return (
-    <TouchableOpacity
-      style={searchResultsStyles.itemContainer}
-      onPress={handlePress}>
-      <Text style={searchResultsStyles.itemText}>{name}</Text>
-    </TouchableOpacity>
-  );
-}
-
-function ItemSeparatorComponent() {
-  return <View style={searchResultsStyles.separator} />;
-}
+import {changeLoadingSearchResults} from '../../redux/reducers/loadingSlice';
+import {ItemComponent} from '../ItemComponent/ItemComponent';
+import {ItemSeparatorComponent} from '../ItemSeparatorComponent/ItemSeparatorComponent';
 
 export const SearchResults = ({data, setEnableList}) => {
   const navigation = useNavigation();
@@ -49,7 +23,7 @@ export const SearchResults = ({data, setEnableList}) => {
   }, [data]);
   function renderItem({item}) {
     return (
-      <Item
+      <ItemComponent
         name={item.name}
         setEnableList={setEnableList}
         screen={currentScreen}

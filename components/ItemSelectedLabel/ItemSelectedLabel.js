@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {itemSelectedLabelStyles} from './ItemSelectedLabelStyles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -82,7 +82,6 @@ export function ItemSelectedLabel() {
       console.log('$');
       setPriceSuffix(price + '$');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }
 
   function refresh() {
@@ -93,7 +92,6 @@ export function ItemSelectedLabel() {
     }
     console.log('refreshing');
     dispatch(changeLoadingChart(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }
   useFocusEffect(
     useCallback(() => {

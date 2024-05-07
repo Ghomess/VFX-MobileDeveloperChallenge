@@ -11,7 +11,7 @@ export function tickerSearch(dispatch, search) {
 
   const demoUrl =
     'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo';
-  fetch(demoUrl)
+  fetch(url)
     .then(async result => {
       const data = await result.json();
 
@@ -38,7 +38,7 @@ export function stockDataFetch(dispatch, ticker) {
   console.log('- URL: ', url);
   const demoUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo`;
 
-  fetch(demoUrl)
+  fetch(url)
     .then(async result => {
       const data = await result.json();
       /*  console.log('--------------');
@@ -95,7 +95,7 @@ export function pairDataFetch(dispatch, pair, dateType) {
   console.log('- URL: ', url);
   const demoUrl = `https://www.alphavantage.co/query?function=FX_${dateTypeUpperCase}&from_symbol=EUR&to_symbol=USD&apikey=demo`;
   console.log('URL Demo: ', dateTypeString);
-  fetch(demoUrl)
+  fetch(url)
     .then(async result => {
       const data = await result.json();
       /*  console.log('--------------');

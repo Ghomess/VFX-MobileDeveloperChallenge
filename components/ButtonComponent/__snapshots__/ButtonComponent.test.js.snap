@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#1A237E",
+      "borderRadius": 10,
+      "borderWidth": 2,
+      "opacity": 1,
+      "padding": 20,
+    }
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#ffff",
+          "fontSize": 20,
+        },
+        {
+          "color": "#1A237E",
+        },
+      ]
+    }
+  >
+    Daily
+  </Text>
+</View>
+`;

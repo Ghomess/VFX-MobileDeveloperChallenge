@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RNCSafeAreaView
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#f5fcff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#1A237E",
+        "borderBottomColor": "#424242",
+        "borderBottomWidth": 2,
+        "borderTopLeftRadius": 5,
+        "borderTopRightRadius": 5,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "width": "90%",
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      selectable={false}
+      style={
+        [
+          {
+            "color": "#ffffff",
+            "fontSize": 20,
+          },
+          undefined,
+          {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          {},
+        ]
+      }
+    >
+      
+    </Text>
+    <TextInput
+      color="#ffffff"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Search ticker"
+      placeholderTextColor="#8C8C8C"
+      style={
+        {
+          "fontSize": 15,
+          "width": "88%",
+        }
+      }
+      value=""
+    />
+  </View>
+</RNCSafeAreaView>
+`;

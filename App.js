@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StatusBar, useColorScheme} from 'react-native';
+import {StatusBar} from 'react-native';
 
 import {BottomTabNavigator} from './stack/BottomTabNavigator';
 import {NavigationContainer} from '@react-navigation/native';

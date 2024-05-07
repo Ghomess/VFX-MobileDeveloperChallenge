@@ -35,6 +35,8 @@ Here's a list of third-party libraries used in this project and their purposes:
 
 - **react-native-dotenv**: React Native DotEnv is a Babel plugin for injecting environment variables into the app. It's used to add the API key as an environment variable.
 
+- **@testing-library/react-native**: ......
+
 ## Installation
 
 1. Clone the repository to your local machine:

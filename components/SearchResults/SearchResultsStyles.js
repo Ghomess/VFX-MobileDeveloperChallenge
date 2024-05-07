@@ -11,18 +11,4 @@ export const searchResultsStyles = StyleSheet.create({
     borderBottomRightRadius: 5,
     borderBottomLeftRadius: 5,
   },
-  separator: {
-    borderBottomWidth: 2,
-
-    borderColor: colors.darkgray,
-  },
-  itemContainer: {
-    borderRadius: 5,
-    padding: 15,
-    paddingLeft: 15,
-  },
-  itemText: {
-    color: colors.white,
-    fontSize: 15,
-  },
 });
