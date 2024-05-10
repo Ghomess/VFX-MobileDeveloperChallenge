@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Searchbar} from '../../components/Searchbar/Searchbar';
 import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
-import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
+
 import {useDispatch, useSelector} from 'react-redux';
 
 import {stockDataFetch, tickerSearch} from '../../utils/apiFunctions';
@@ -12,6 +12,7 @@ import {
   changeLoadingChart,
   changeLoadingSearchResults,
 } from '../../redux/reducers/loadingSlice';
+import {LineChartComponentWithDetails} from '../../components/LineChartWithDetailsComponent/LineChartWithDetailsComponent';
 
 export default function Stocks() {
   const tickerSearchResults = useSelector(
@@ -19,14 +20,14 @@ export default function Stocks() {
   );
   const ticker = useSelector(state => state.ticker.ticker);
   const [search, setSearch] = useState('');
-  const stockdata = useSelector(state => state.ticker.stockData);
+
   const [filteredData, setFilteredData] = useState([]);
 
   const dispatch = useDispatch();
   const [enableList, setEnableList] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  //Use Effect to check if the user inputed on the searchbar
-  //if yes it fetches the api data
+  //Use Effect to check if the user has typed on the search bar
+  //if one of the options is selected, it fetches the data from the API
   useEffect(() => {
     try {
       if (search.length > 0 && search !== ticker) {
@@ -52,13 +53,14 @@ export default function Stocks() {
     }
   }, [ticker, enableList]);
 
-  //Update FilteredData with the redux search result state
+  //Update FilteredData with the state of the redux search results
   useEffect(() => {
     if (tickerSearchResults) {
       setFilteredData(tickerSearchResults);
     }
   }, [tickerSearchResults]);
 
+  //Enable the list when the search bar is focused and data exists inside filteredData
   useEffect(() => {
     if (filteredData?.length > 0 && isFocused) {
       setEnableList(true);
@@ -76,7 +78,7 @@ export default function Stocks() {
       {enableList && (
         <SearchResults data={filteredData} setEnableList={setEnableList} />
       )}
-      <LineChartComponent data={stockdata} />
+      <LineChartComponentWithDetails />
     </SafeAreaView>
   );
 }

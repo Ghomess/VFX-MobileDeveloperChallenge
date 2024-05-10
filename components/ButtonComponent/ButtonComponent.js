@@ -31,7 +31,8 @@ const ButtonComponent = ({title}) => {
       style={[
         buttonStyles.button,
         checkDataType() === title && buttonStyles.buttonSelected,
-      ]}>
+      ]}
+      testID="ButtonComponent.ToucableOpacity">
       <Text
         style={[
           buttonStyles.title,

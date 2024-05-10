@@ -1,5 +1,4 @@
-import {changeLoadingChart} from '../redux/reducers/loadingSlice';
-import {addPairData, addPairDateType} from '../redux/reducers/pairSlice';
+import {addPairData} from '../redux/reducers/pairSlice';
 import {
   addstockData,
   addtickerSearchResults,
@@ -36,7 +35,8 @@ export function stockDataFetch(dispatch, ticker) {
   const url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticker}&apikey=${API_KEY}`;
 
   console.log('- URL: ', url);
-  const demoUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo`;
+  const demoUrl =
+    'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo';
 
   fetch(url)
     .then(async result => {

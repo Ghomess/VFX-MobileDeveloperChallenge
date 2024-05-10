@@ -4,12 +4,13 @@ import {Searchbar} from '../../components/Searchbar/Searchbar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../../styles';
 import {SearchResults} from '../../components/SearchResults/SearchResults';
-import {LineChartComponent} from '../../components/LineChartComponent/LineChartComponent';
+
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import {currencystyles} from './CurrencyStyles';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {pairDataFetch} from '../../utils/apiFunctions';
+import {LineChartComponentWithDetails} from '../../components/LineChartWithDetailsComponent/LineChartWithDetailsComponent';
 
 export default function Currency() {
   const pair = useSelector(state => state.pair.pair);
@@ -88,7 +89,7 @@ export default function Currency() {
         <ButtonComponent title="Weekly" />
         <ButtonComponent title="Monthly" />
       </View>
-      <LineChartComponent data={pairdata} />
+      <LineChartComponentWithDetails />
     </SafeAreaView>
   );
 }

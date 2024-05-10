@@ -40,7 +40,7 @@ export function ItemSelectedLabel() {
     'December',
   ];
 
-  const [priceSuffix, setPriceSuffix] = useState();
+  const [priceWithSuffix, setPriceWithSuffix] = useState();
   const [date, setDate] = useState();
   function CheckDataType() {
     let screenDateSelected;
@@ -65,22 +65,18 @@ export function ItemSelectedLabel() {
       price = pairPrice;
       const pairSepareted = pair.split('/');
       if (pairSepareted[0] === 'EUR') {
-        console.log('€');
-        setPriceSuffix(price + '€');
+        setPriceWithSuffix(price + '€');
       } else if (pairSepareted[0] === 'USD') {
-        console.log('$');
-        setPriceSuffix(price + '$');
+        setPriceWithSuffix(price + '$');
       } else if (pairSepareted[0] === 'GBP') {
-        console.log('£');
-        setPriceSuffix(price + '£');
+        setPriceWithSuffix(price + '£');
       } else {
-        console.log('$');
-        setPriceSuffix(price + '$');
+        setPriceWithSuffix(price + '$');
       }
     } else if (currentScreen === 'Stocks' && ticker) {
       price = stockPrice;
-      console.log('$');
-      setPriceSuffix(price + '$');
+
+      setPriceWithSuffix(price + '$');
     }
   }
 
@@ -90,7 +86,7 @@ export function ItemSelectedLabel() {
     } else if (currentScreen === 'Stocks' && ticker) {
       stockDataFetch(dispatch, ticker, stockDateType);
     }
-    console.log('refreshing');
+
     dispatch(changeLoadingChart(true));
   }
   useFocusEffect(
@@ -105,10 +101,11 @@ export function ItemSelectedLabel() {
     <View style={itemSelectedLabelStyles.container}>
       <Text style={itemSelectedLabelStyles.itemMonth}>{date}</Text>
       <View style={itemSelectedLabelStyles.pricerefreshContainer}>
-        <Text style={itemSelectedLabelStyles.itemPrice}>{priceSuffix}</Text>
+        <Text style={itemSelectedLabelStyles.itemPrice}>{priceWithSuffix}</Text>
         <TouchableOpacity
           style={itemSelectedLabelStyles.refreshButton}
-          onPress={() => refresh()}>
+          onPress={() => refresh()}
+          testID="ItemSelectedLabel.ToucableOpacity">
           <FontAwesome name={'refresh'} size={20} color={colors.white} />
         </TouchableOpacity>
       </View>
