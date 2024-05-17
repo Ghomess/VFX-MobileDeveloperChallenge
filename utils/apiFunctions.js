@@ -12,7 +12,7 @@ export async function tickerSearch(dispatch, search) {
   //demoURL is used when I used all the free account callbacks from the API.
   const demoUrl =
     'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo';
-  const response = await fetch(demoUrl);
+  const response = await fetch(url);
   const data = await response.json();
   console.log('DATA SEARCH:::: ', data);
 
@@ -38,7 +38,7 @@ export async function stockDataFetch(dispatch, ticker) {
   console.log('- URL: ', url);
   const demoUrl =
     'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo';
-  const response = await fetch(demoUrl);
+  const response = await fetch(url);
   const data = await response.json();
   let dataToRedux = [];
   let timestampsArray = [];
@@ -99,7 +99,7 @@ export async function pairDataFetch(dispatch, pair, dateType) {
 
   const demoUrl = `https://www.alphavantage.co/query?function=FX_${dateTypeUpperCase}&from_symbol=EUR&to_symbol=USD&apikey=demo`;
 
-  const response = await fetch(demoUrl);
+  const response = await fetch(url);
   const data = await response.json();
   console.log('data PAIRDATA: ', data);
   /*  console.log('--------------');

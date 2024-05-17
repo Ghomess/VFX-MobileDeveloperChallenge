@@ -38,7 +38,7 @@ export const LineChartComponentWithDetails = () => {
 
   const [newData, setNewData] = useState();
 
-  const dispatchSelected = (date, value) => {
+  function dispatchSelected(date, value) {
     //Function to dispatch the selected value and date depending on the screen the user is in
     if (currentScreen === 'Stocks') {
       dispatch(addStockMonthSelected(date));
@@ -47,7 +47,7 @@ export const LineChartComponentWithDetails = () => {
       dispatch(addPairDateSelected(date));
       dispatch(addPairPrice(value));
     }
-  };
+  }
 
   useEffect(() => {
     //UseEffect to update the lineChart when the user returns to the screen
@@ -134,7 +134,7 @@ export const LineChartComponentWithDetails = () => {
             suffix={suffix}
             indexSelected={indexSelected}
             setIndexSelected={setIndexSelected}
-            dataToRedux={dispatchSelected}
+            dispatchSelected={dispatchSelected}
             currentScreen={currentScreen}
           />
         </View>
