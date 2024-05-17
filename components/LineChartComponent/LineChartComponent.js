@@ -11,7 +11,7 @@ export const LineChartComponent = ({
   suffix,
   indexSelected,
   setIndexSelected,
-  dataToRedux,
+  dispatchSelected,
   currentScreen,
 }) => {
   const windowHeight = Dimensions.get('window').height;
@@ -58,7 +58,7 @@ export const LineChartComponent = ({
 
         setIndexSelected(index);
 
-        dataToRedux(value, data[0][index]);
+        dispatchSelected(data[0][index], value);
       }}
     />
   );

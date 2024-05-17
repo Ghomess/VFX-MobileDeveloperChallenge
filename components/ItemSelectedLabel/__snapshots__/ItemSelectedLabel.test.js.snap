@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemSelectedLabel renders correctly  with a currency selected 1`] = `
+exports[`ItemSelectedLabel renders correctly renders correctly with a currency selected 1`] = `
 <View
   style={
     {
@@ -109,7 +109,7 @@ exports[`ItemSelectedLabel renders correctly  with a currency selected 1`] = `
 </View>
 `;
 
-exports[`ItemSelectedLabel renders correctly  with a stock selected 1`] = `
+exports[`ItemSelectedLabel renders correctly renders correctly with a stock selected 1`] = `
 <View
   style={
     {

@@ -14,7 +14,6 @@ import {LineChartComponentWithDetails} from '../../components/LineChartWithDetai
 
 export default function Currency() {
   const pair = useSelector(state => state.pair.pair);
-  const pairdata = useSelector(state => state.pair.pairData);
   const pairDateType = useSelector(state => state.pair.pairDateType);
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
@@ -27,9 +26,9 @@ export default function Currency() {
   const [filteredSearch, setFilteredSearch] = useState([]);
   const [enableList, setEnableList] = useState(false);
 
-  //To filter the data depending on the text input value and if the data is updated
+  //To filter the data based on the text input value and whether the data is updated
   useEffect(() => {
-    //if value inside input exists, filters the data, otherwise it makes the filteredData empty
+    //if value in input exists, filters the data, otherwise it makes the filteredData empty
     search
       ? setFilteredSearch(
           pairs.filter(item =>
@@ -41,6 +40,8 @@ export default function Currency() {
   }, [search]);
 
   useEffect(() => {
+    //if the user has selected a pair, it will make the search value equal to the selected pair
+    //in this case, it will fetch the data
     try {
       if (search.length > 0 && search === pair) {
         console.log(
@@ -68,6 +69,7 @@ export default function Currency() {
   }, [pair, enableList]);
 
   useEffect(() => {
+    //When the search bar is focused, it allows you to select from the list of pairs.
     if (isFocused) {
       setEnableList(true);
     }

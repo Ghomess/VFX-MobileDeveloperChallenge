@@ -16,15 +16,42 @@ jest.mock('@react-navigation/native', () => ({
   }),
 }));
 
-test('renders correctly', async () => {
+const dataMocked = [
+  {id: 0, name: 'T'},
+  {id: 1, name: 'T.TRT'},
+  {id: 2, name: 'T04.FRK'},
+  {id: 3, name: 'T0A.FRK'},
+  {id: 4, name: 'T0P.FRK'},
+  {id: 5, name: 'T0T.FRK'},
+  {id: 6, name: 'T18.FRK'},
+  {id: 7, name: 'T1A.FRK'},
+  {id: 8, name: 'T10G.LON'},
+  {id: 9, name: 'T15B.FRK'},
+];
+
+test('renders correctly with data', async () => {
+  const {getByTestId} = render(
+    <Provider store={store}>
+      <NavigationContainer>
+        <SearchResults data={dataMocked} />
+      </NavigationContainer>
+    </Provider>,
+  );
+  const flatList = getByTestId('SearchResults.FlatList');
+  expect(flatList).toBeDefined();
   await waitFor(() => {
-    const tree = render(
-      <Provider store={store}>
-        <NavigationContainer>
-          <SearchResults data={null} />
-        </NavigationContainer>
-      </Provider>,
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(flatList.props.data.length).toBe(dataMocked.length);
   });
+});
+
+test('renders correctly snapshot', async () => {
+  const tree = render(
+    <Provider store={store}>
+      <NavigationContainer>
+        <SearchResults data={dataMocked} />
+      </NavigationContainer>
+    </Provider>,
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

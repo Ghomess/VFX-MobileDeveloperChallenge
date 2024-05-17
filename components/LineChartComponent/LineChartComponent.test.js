@@ -3,8 +3,14 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import store from '../../redux/store';
-import {render, waitFor} from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react-native';
 import {LineChartComponent} from './LineChartComponent';
+import {pairDataFetch} from '../../utils/apiFunctions';
 
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
@@ -77,7 +83,7 @@ const currencyMonthlyDataMock = [
 ];
 
 describe('LineChartComponent renders correctly', () => {
-  test('Currency Screen Daily', async () => {
+  test('renders correctly the currency screen when pairDateType is Daily', async () => {
     await waitFor(() => {
       const suffix = '€';
       const indexSelected = 0;
@@ -101,7 +107,7 @@ describe('LineChartComponent renders correctly', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  test('Currency Screen Weekly', async () => {
+  test('renders correctly the currency screen when pairDateType is weekly', async () => {
     await waitFor(() => {
       const suffix = '£';
       const indexSelected = 0;
@@ -125,7 +131,7 @@ describe('LineChartComponent renders correctly', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  test('Currency Screen Monthly', async () => {
+  test('renders correctly the currency screen when pairDateType is monthly', async () => {
     await waitFor(() => {
       const suffix = '$';
       const indexSelected = 0;
@@ -149,7 +155,7 @@ describe('LineChartComponent renders correctly', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  test('Stocks Screen', async () => {
+  test('renders correctly the stocks screen ', async () => {
     await waitFor(() => {
       const suffix = '€';
       const indexSelected = 0;

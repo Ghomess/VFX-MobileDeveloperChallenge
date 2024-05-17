@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
 import {useDispatch} from 'react-redux';
-import {addticker} from '../../redux/reducers/stockSlice';
+import {addTicker} from '../../redux/reducers/stockSlice';
 import {addPair} from '../../redux/reducers/pairSlice';
 
 import {changeLoadingChart} from '../../redux/reducers/loadingSlice';
@@ -12,7 +12,7 @@ export const ItemComponent = ({name, setEnableList, screen}) => {
   const dispatch = useDispatch();
   const handlePress = () => {
     if (screen === 'Stocks') {
-      dispatch(addticker(name));
+      dispatch(addTicker(name));
     } else if (screen === 'Currency') {
       dispatch(addPair(name));
     }

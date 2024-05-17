@@ -16,11 +16,13 @@ export const SearchResults = ({data, setEnableList}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //if data from the fetch exists, it will stop loading
     if (data) {
       dispatch(changeLoadingSearchResults(false));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
   function renderItem({item}) {
     return (
       <ItemComponent
@@ -38,6 +40,7 @@ export const SearchResults = ({data, setEnableList}) => {
         keyExtractor={item => item.id}
         renderItem={renderItem}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        testID="SearchResults.FlatList"
       />
     </View>
   );

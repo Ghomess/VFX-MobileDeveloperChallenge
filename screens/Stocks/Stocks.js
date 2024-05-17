@@ -26,9 +26,10 @@ export default function Stocks() {
   const dispatch = useDispatch();
   const [enableList, setEnableList] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  //Use Effect to check if the user has typed on the search bar
-  //if one of the options is selected, it fetches the data from the API
+
   useEffect(() => {
+    //Use Effect to check if the user has typed on the search bar
+    //if one of the options is selected, it fetches the data from the API
     try {
       if (search.length > 0 && search !== ticker) {
         dispatch(changeLoadingSearchResults(true));
@@ -46,22 +47,22 @@ export default function Stocks() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  //Update the search value when the ticker is selected
   useEffect(() => {
+    //Update the search value when the ticker is selected
     if (ticker) {
       setSearch(ticker);
     }
   }, [ticker, enableList]);
 
-  //Update FilteredData with the state of the redux search results
   useEffect(() => {
+    //Update FilteredData with the state of the Redux search results, in this case data fetched from the API.
     if (tickerSearchResults) {
       setFilteredData(tickerSearchResults);
     }
   }, [tickerSearchResults]);
 
-  //Enable the list when the search bar is focused and data exists inside filteredData
   useEffect(() => {
+    //Enable the list when the search bar is focused and data exists inside filteredData
     if (filteredData?.length > 0 && isFocused) {
       setEnableList(true);
     }

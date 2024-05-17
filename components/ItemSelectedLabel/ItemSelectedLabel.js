@@ -42,7 +42,10 @@ export function ItemSelectedLabel() {
 
   const [priceWithSuffix, setPriceWithSuffix] = useState();
   const [date, setDate] = useState();
+
   function CheckDataType() {
+    //function to get the dateSelected and the dateType depending on what screen the user is on
+
     let screenDateSelected;
     let screenDateType;
     if (currentScreen === 'Stocks' && ticker) {
@@ -53,6 +56,7 @@ export function ItemSelectedLabel() {
       screenDateType = pairDateType;
     }
 
+    //and sets the date variable with the selected date to the month type if the dateType is Monthly.
     if (screenDateType === 'Monthly') {
       setDate(monthNames[new Date(screenDateSelected).getMonth()]);
     } else {
@@ -60,6 +64,7 @@ export function ItemSelectedLabel() {
     }
   }
   function PriceSuffixFunction() {
+    //Function to check the base currency type to add it as a prefix to the displayed price.
     let price;
     if (currentScreen === 'Currency' && pair) {
       price = pairPrice;
@@ -89,7 +94,9 @@ export function ItemSelectedLabel() {
 
     dispatch(changeLoadingChart(true));
   }
+
   useFocusEffect(
+    //To update the text when the user returns to the screen
     useCallback(() => {
       PriceSuffixFunction();
       CheckDataType();

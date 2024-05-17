@@ -32,7 +32,7 @@ describe('ButtonComponent', () => {
     });
   });
 
-  test('dispatches addPairDateType action of the title on press', async () => {
+  test('check if it sends the title with the addPairDateType action on press', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const title = 'Daily';
@@ -49,7 +49,7 @@ describe('ButtonComponent', () => {
     });
   });
 
-  test('dispatches changeLoadingChart action on press', async () => {
+  test('check if it sends the value true with the changeLoadingChart action on press', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const {getByTestId} = render(

@@ -22,7 +22,7 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 describe('ItemSelectedLabel renders correctly', () => {
-  test(' with a currency selected', async () => {
+  test('renders correctly with a currency selected', async () => {
     await waitFor(() => {
       jest
         .spyOn(require('@react-navigation/native'), 'useNavigation')
@@ -60,7 +60,7 @@ describe('ItemSelectedLabel renders correctly', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  test(' with a stock selected', async () => {
+  test('renders correctly with a stock selected', async () => {
     await waitFor(() => {
       jest
         .spyOn(require('@react-navigation/native'), 'useNavigation')
@@ -101,7 +101,7 @@ describe('ItemSelectedLabel renders correctly', () => {
 });
 
 describe('ItemSelectedLabel dispatches', () => {
-  test('dispatches changeLoadingChart action with a stock selected', async () => {
+  test('check if it dispatches changeLoadingChart action with a stock selected', async () => {
     await waitFor(() => {
       jest
         .spyOn(require('@react-navigation/native'), 'useNavigation')
@@ -126,7 +126,7 @@ describe('ItemSelectedLabel dispatches', () => {
     });
   });
 
-  test('dispatches changeLoadingChart action with a currency selected', async () => {
+  test('check if it dispatches changeLoadingChart action with a currency selected', async () => {
     await waitFor(() => {
       jest
         .spyOn(require('@react-navigation/native'), 'useNavigation')
@@ -152,7 +152,7 @@ describe('ItemSelectedLabel dispatches', () => {
   });
 });
 describe('ItemSelectedLabel refresh function with both items selected', () => {
-  test('currentScreen is Stocks', async () => {
+  test('check if it refreshes when currentScreen is Stocks', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const pairDataFetchMock = jest.fn();
@@ -197,7 +197,7 @@ describe('ItemSelectedLabel refresh function with both items selected', () => {
       expect(dispatchMock).toHaveBeenCalledWith(changeLoadingChart(true));
     });
   });
-  test('currentScreen is Currency', async () => {
+  test('check if it refreshes when currentScreen is Currency', async () => {
     const dispatchMock = jest.spyOn(store, 'dispatch');
     const pairDataFetchMock = jest.fn();
     const stockDataFetchMock = jest.fn();

@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {fireEvent, render, waitFor} from '@testing-library/react-native';
 
 import {ItemComponent} from './ItemComponent';
-import stockSlice, {addticker} from '../../redux/reducers/stockSlice';
+import stockSlice, {addTicker} from '../../redux/reducers/stockSlice';
 import {configureStore} from '@reduxjs/toolkit';
 import pairSlice, {addPair} from '../../redux/reducers/pairSlice';
 import loadingSlice, {
@@ -38,7 +38,7 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     store = createTestStore();
   });
-  test('renders correctly in Stocks screen', async () => {
+  test('renders correctly in stock screen', async () => {
     await waitFor(() => {
       const tree = render(
         <Provider store={store}>
@@ -54,7 +54,7 @@ describe('ItemComponent', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  test('renders correctly in Currency screen', async () => {
+  test('renders correctly in the currency screen', async () => {
     await waitFor(() => {
       const tree = render(
         <Provider store={store}>
@@ -71,7 +71,7 @@ describe('ItemComponent', () => {
     });
   });
 
-  test('calls setEnableList on press in Stocks screen', async () => {
+  test('check if it calls setEnableList and changes it to false on press in stock screen', async () => {
     await waitFor(() => {
       const setEnableListMock = jest.fn();
 
@@ -93,7 +93,7 @@ describe('ItemComponent', () => {
     });
   });
 
-  test('calls setEnableList on press in Currency screen', async () => {
+  test('check if it calls setEnableList and changes it to false on press in currency screen', async () => {
     await waitFor(() => {
       const setEnableListMock = jest.fn();
 
@@ -117,7 +117,7 @@ describe('ItemComponent', () => {
 
   //Dispatches
 
-  test('dispatches addticker action in Stocks screen', async () => {
+  test('check if it dispatches addTicker action in stocks screen', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const {getByTestId} = render(
@@ -133,11 +133,11 @@ describe('ItemComponent', () => {
       );
       const touchable = getByTestId('ItemComponent.ToucableOpacity');
       fireEvent.press(touchable);
-      expect(dispatchMock).toHaveBeenCalledWith(addticker('META'));
+      expect(dispatchMock).toHaveBeenCalledWith(addTicker('META'));
     });
   });
 
-  test('dispatches addPair action in Currency screen', async () => {
+  test('check if it dispatches addPair action in currency screen', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const {getByTestId} = render(
@@ -157,7 +157,7 @@ describe('ItemComponent', () => {
     });
   });
 
-  test('dispatches changeLoadingChart action in Currency screen', async () => {
+  test('check if it dispatches changeLoadingChart action in currency screen', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const {getByTestId} = render(
@@ -176,7 +176,7 @@ describe('ItemComponent', () => {
       expect(dispatchMock).toHaveBeenCalledWith(changeLoadingChart(true));
     });
   });
-  test('dispatches changeLoadingChart action in Stocks screen', async () => {
+  test('check if it dispatches changeLoadingChart action in stock screen', async () => {
     await waitFor(() => {
       const dispatchMock = jest.spyOn(store, 'dispatch');
       const {getByTestId} = render(

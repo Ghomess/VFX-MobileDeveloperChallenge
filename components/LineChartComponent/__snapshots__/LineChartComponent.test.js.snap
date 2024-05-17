@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LineChartComponent renders correctly Currency Screen Daily 1`] = `
+exports[`LineChartComponent renders correctly renders correctly the currency screen when pairDateType is Daily 1`] = `
 <View
   style={
     {
@@ -1301,7 +1301,7 @@ exports[`LineChartComponent renders correctly Currency Screen Daily 1`] = `
 </View>
 `;
 
-exports[`LineChartComponent renders correctly Currency Screen Monthly 1`] = `
+exports[`LineChartComponent renders correctly renders correctly the currency screen when pairDateType is monthly 1`] = `
 <View
   style={
     {
@@ -3042,7 +3042,7 @@ exports[`LineChartComponent renders correctly Currency Screen Monthly 1`] = `
 </View>
 `;
 
-exports[`LineChartComponent renders correctly Currency Screen Weekly 1`] = `
+exports[`LineChartComponent renders correctly renders correctly the currency screen when pairDateType is weekly 1`] = `
 <View
   style={
     {
@@ -4079,7 +4079,7 @@ exports[`LineChartComponent renders correctly Currency Screen Weekly 1`] = `
 </View>
 `;
 
-exports[`LineChartComponent renders correctly Stocks Screen 1`] = `
+exports[`LineChartComponent renders correctly renders correctly the stocks screen  1`] = `
 <View
   style={
     {

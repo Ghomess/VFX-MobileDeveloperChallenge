@@ -13,23 +13,23 @@ const stockSlice = createSlice({
   name: 'ticker',
   initialState,
   reducers: {
-    addticker: (state, action) => {
+    addTicker: (state, action) => {
       console.log('ADD ticker: ', action.payload);
       state.ticker = action.payload;
     },
-    addstockData: (state, action) => {
+    addStockData: (state, action) => {
       console.log('ADD stock DATA: ', action.payload);
       state.stockData = action.payload;
     },
-    addstockMonthSelected: (state, action) => {
+    addStockMonthSelected: (state, action) => {
       console.log('ADD stock MONTH: ', action.payload);
       state.stockMonthSelected = action.payload;
     },
-    addtickerSearchResults: (state, action) => {
+    addTickerSearchResults: (state, action) => {
       console.log('ADD ticker SEARCH RESULTS: ', action.payload);
       state.tickerSearchResults = action.payload;
     },
-    addstockPrice: (state, action) => {
+    addStockPrice: (state, action) => {
       console.log('ADD stock PRICE: ', action.payload);
       state.stockPrice = action.payload;
     },
@@ -37,11 +37,11 @@ const stockSlice = createSlice({
 });
 
 export const {
-  addticker,
-  addstockData,
-  addstockMonthSelected,
-  addtickerSearchResults,
-  addstockPrice,
+  addTicker,
+  addStockData,
+  addStockMonthSelected,
+  addTickerSearchResults,
+  addStockPrice,
 } = stockSlice.actions;
 
 export default stockSlice.reducer;
